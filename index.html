@@ -26,6 +26,50 @@ body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 Montserrat,syst
 .cap{position:absolute;left:-5px;right:-5px;height:20px;border-radius:10px;background:linear-gradient(180deg,var(--gold2),var(--gold));box-shadow:inset 0 -3px 6px #0004}
 .cap.t{top:0}.cap.b{bottom:0}
 #logo{max-width:120px;max-height:88px;object-fit:contain;display:block}#logo[hidden]{display:none}
+[hidden]{display:none!important}
+#land{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px 20px;background:radial-gradient(70% 60% at 50% 38%,var(--hero),var(--bg) 72%)}
+.lc{position:relative;z-index:2;max-width:900px}
+.silk{position:absolute;inset:0;width:100%;height:100%}
+.silk path{fill:none;stroke:var(--gold);stroke-width:1.3;opacity:.4;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1;animation:dr 7s ease-in-out infinite alternate}
+.silk path:nth-child(2){animation-delay:1.2s}.silk path:nth-child(3){animation-delay:2.4s}
+@keyframes dr{to{stroke-dashoffset:0}}
+.f{position:absolute;color:var(--gold);opacity:.22;transition:transform .6s ease-out;pointer-events:none}
+.f>div{animation:drift ease-in-out infinite alternate}.f svg{display:block;width:100%;height:auto}
+@keyframes drift{from{transform:translateY(-16px) rotate(-14deg)}to{transform:translateY(16px) rotate(16deg)}}
+#logo2{display:block;max-height:84px;max-width:200px;margin:0 auto 10px;object-fit:contain}
+.scis{width:min(50vw,190px);margin:0 auto}
+.scis svg{width:100%;overflow:visible;filter:drop-shadow(0 12px 24px #d4af3744)}
+.sa,.sb{transform-origin:100px 104px}
+.sa{animation:snA 2.8s cubic-bezier(.65,0,.3,1) infinite}.sb{animation:snB 2.8s cubic-bezier(.65,0,.3,1) infinite}
+@keyframes snA{0%,100%{transform:rotate(4deg)}30%,42%{transform:rotate(26deg)}58%{transform:rotate(3deg)}}
+@keyframes snB{0%,100%{transform:rotate(-4deg)}30%,42%{transform:rotate(-26deg)}58%{transform:rotate(-3deg)}}
+.g{fill:none;stroke:var(--gold2);stroke-width:6;stroke-linecap:round}
+.hs{fill:none;stroke:var(--gold2);stroke-width:2.2;stroke-linecap:round;opacity:0;transform-origin:100px 20px;animation:fall 2.8s var(--d,0s) infinite}
+@keyframes fall{0%,55%{opacity:0;transform:none}58%{opacity:1}100%{opacity:0;transform:translate(var(--x,0),130px) rotate(50deg)}}
+.wl,.wn{perspective:700px}
+.w{display:inline-block;white-space:nowrap}
+.ch{display:inline-block;color:var(--cb,var(--gold2));opacity:0;transform:translateY(42px) rotateX(-80deg);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards,glint 6s ease-in-out infinite;animation-delay:calc(var(--i)*45ms),calc(2s + var(--i)*80ms)}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes glint{0%,14%,100%{color:var(--cb,var(--gold2));text-shadow:none}7%{color:#fff;text-shadow:0 0 26px var(--gold)}}
+.wl{--cb:var(--tx);font:600 clamp(18px,4.2vw,30px)/1.3 'Playfair Display',Georgia,serif;letter-spacing:4px;text-transform:uppercase;margin:16px 0 4px}
+.wn{margin:0;font:700 clamp(42px,12vw,96px)/1.02 'Playfair Display',Georgia,serif}
+.wt{margin:14px 0 0;color:var(--mu);letter-spacing:3px;font-size:12px;text-transform:uppercase;opacity:0;animation:up .9s 1.5s forwards}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.mag{display:inline-block;margin-top:30px;transition:transform .25s ease-out}
+.cta{position:relative;overflow:hidden;display:inline-flex;gap:12px;align-items:center;padding:18px 34px;border:0;border-radius:999px;font:700 clamp(15px,3.6vw,18px) Montserrat,sans-serif;letter-spacing:.5px;color:var(--ink);background:linear-gradient(135deg,var(--gold2),var(--gold));cursor:pointer;opacity:0;animation:up .9s 1.9s forwards,ring 2.6s 3s infinite}
+.cta:after{content:'';position:absolute;top:0;bottom:0;width:60px;left:-90px;background:linear-gradient(100deg,transparent,#fff9,transparent);transform:skewX(-20deg);animation:sheen 3.4s 3s infinite}
+@keyframes sheen{0%{left:-90px}35%,100%{left:120%}}
+@keyframes ring{0%{box-shadow:0 0 0 0 #d4af3788}70%,100%{box-shadow:0 0 0 22px #d4af3700}}
+.cta svg{width:22px;height:22px;animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(6px)}}
+.wipe{position:fixed;inset:0;z-index:50;pointer-events:none}.wipe.on{pointer-events:all}
+.wipe i{position:absolute;inset:0;transition:transform .65s cubic-bezier(.77,0,.18,1)}
+.wipe i:first-child{background:linear-gradient(135deg,var(--gold2),var(--gold));clip-path:polygon(0 0,58.2% 0,42.2% 100%,0 100%);transform:translateX(-110%)}
+.wipe i:last-child{background:var(--card);clip-path:polygon(58% 0,100% 0,100% 100%,42% 100%);transform:translateX(110%)}
+.wipe.on i{transform:none}
+body.enter .hero .in,body.enter #app>*{animation:up .7s cubic-bezier(.2,.7,.2,1) both}
+body.enter #app>*:nth-child(2){animation-delay:.1s}body.enter #app>*:nth-child(3){animation-delay:.2s}
+@media(prefers-reduced-motion:reduce){#land *,.wipe i{animation-duration:.01s!important;animation-iteration-count:1!important;transition-duration:.01s!important}}
 @media(prefers-reduced-motion:reduce){.pole3d,.tube{animation:none}}
 button,select,input{font:inherit;color:inherit}
 .btn{border:0;border-radius:12px;padding:11px 18px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--ink);font-weight:600;letter-spacing:.5px;cursor:pointer;box-shadow:0 6px 18px #0004}
@@ -62,10 +106,24 @@ input:focus,select:focus{outline:2px solid var(--gold)}
 @media(max-width:560px){.hero,.hero .in{gap:14px}.nav{flex-direction:row}}
 </style></head>
 <body>
+<section id='land'>
+<svg class='silk' viewBox='0 0 1000 600' preserveAspectRatio='none' aria-hidden='true'><path pathLength='1' d='M-20 420C200 300 330 560 520 430S820 250 1040 380'/><path pathLength='1' d='M-20 250C180 150 360 330 540 220S840 90 1040 200'/><path pathLength='1' d='M-20 520C240 470 400 600 620 520S880 430 1040 500'/></svg>
+<div id='fl' aria-hidden='true'></div>
+<div class='lc'>
+<img id='logo2' alt='' hidden>
+<div class='scis' aria-hidden='true'><svg viewBox='0 0 200 230' fill='none'><defs><linearGradient id='gg' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#f1d98a'/><stop offset='1' stop-color='#b8892a'/></linearGradient></defs>
+<g class='sa'><path d='M95 104L108 104L101 8Z' fill='url(#gg)'/><path class='g' d='M100 104L86 158'/><circle class='g' cx='86' cy='158' r='17'/></g>
+<g class='sb'><path d='M105 104L92 104L99 8Z' fill='url(#gg)'/><path class='g' d='M100 104L114 158'/><circle class='g' cx='114' cy='158' r='17'/></g>
+<circle cx='100' cy='104' r='6' fill='#f1d98a' stroke='#6b4e12' stroke-width='2'/>
+<path class='hs' style='--x:-26px' d='M100 16c-7 9 7 17 0 28'/><path class='hs' style='--x:4px;--d:.05s' d='M98 14c8 8-6 18 1 26'/><path class='hs' style='--x:30px;--d:.1s' d='M102 18c-6 10 6 14 0 24'/></svg></div>
+<p class='wl' id='wl'></p><h1 class='wn' id='wn'></h1><p class='wt' id='wt'></p>
+<div class='mag' id='mag'><button class='cta' id='cta'><span>Clicca per prenotare un servizio</span><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></button></div>
+</div></section>
+<div class='wipe' id='wipe'><i></i><i></i></div>
 <section class="hero"><div class="in">
   <div class="stage" aria-hidden="true"><img id="logo" alt="" hidden><svg id="emb" viewBox="0 0 96 96" width="88" height="88" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);display:block"><circle cx="48" cy="48" r="45" stroke-width="2"/><circle cx="48" cy="48" r="39" stroke-width=".8"/><g transform="translate(24 24)" stroke-width="2.4"><circle cx="11" cy="37" r="6"/><circle cx="25" cy="39" r="6"/><path d="M15 32 40 6M22 34 12 6"/></g></svg></div>
   <div><h1 id="shop"></h1><p id="sub"></p></div>
-  <div class="nav"><button class="btn sm" onclick="go('c')">Prenota</button><button class="btn ghost sm" onclick="go('a')">Admin</button></div>
+  <div class="nav"><button class="btn sm" onclick="nav('c')">Prenota</button><button class="btn ghost sm" onclick="nav('l')">Home</button><button class="btn ghost sm" onclick="nav('a')">Admin</button></div>
 </div></section>
 <div class="gl"></div>
 <main class="wrap" id="app"></main>
@@ -80,12 +138,12 @@ var IC={
 };
 var ICN=[["s","Forbici"],["c","Pettine"],["r","Rasoio"],["w","Shampoo"],["p","Barber pole"]];
 var DAYS=["Domenica","Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato"];
-var DEF={shop:"Barber & Co.",sub:"Barbiere · Parrucchiere · dal 1987",logo:"",pin:"1234",step:30,
+var DEF={shop:"Barber & Co.",wel:"Benvenuto da",sub:"Barbiere · Parrucchiere · dal 1987",logo:"",pin:"1234",step:30,
  chairs:[{id:1,n:"Poltrona 1"},{id:2,n:"Poltrona 2"}],
  services:[{id:1,n:"Taglio uomo",p:18,d:30,i:"s"},{id:2,n:"Barba",p:10,d:30,i:"r"},{id:3,n:"Taglio + barba",p:25,d:60,i:"c"},{id:4,n:"Shampoo",p:8,d:15,i:"w"},{id:5,n:"Taglio bimbo",p:12,d:30,i:"s"}],
  hours:[{x:1,o:"09:00",c:"19:00"},{x:1,o:"09:00",c:"19:00"},{x:0,o:"09:00",c:"19:00"},{x:0,o:"09:00",c:"19:00"},{x:0,o:"09:00",c:"19:00"},{x:0,o:"09:00",c:"19:00"},{x:0,o:"09:00",c:"18:00"}],
  closures:[],bookings:[]};
-var S=load(),V="c",A=false,st={step:0,sid:null,date:null,time:null,done:null};
+var S=load(),V="l",A=false,st={step:0,sid:null,date:null,time:null,done:null};
 function load(){try{var j=localStorage.getItem("bbk2");if(j)return JSON.parse(j)}catch(e){}return JSON.parse(JSON.stringify(DEF))}
 function save(){try{localStorage.setItem("bbk2",JSON.stringify(S))}catch(e){}}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
@@ -109,7 +167,7 @@ function slots(ds,dur){
   for(var t=o;t+dur<=c;t+=S.step){if(t<=nm)continue;if(freeChair(ds,t,dur)!==null)out.push(hm(t))}
   return out}
 function go(v){V=v;if(v=="c")st={step:0,sid:null,date:null,time:null,done:null};render()}
-function render(){document.getElementById("shop").textContent=S.shop;document.getElementById("sub").textContent=S.sub==null?DEF.sub:S.sub;var lg=document.getElementById("logo"),em=document.getElementById("emb");lg.hidden=!S.logo;em.style.display=S.logo?"none":"block";if(S.logo)lg.src=S.logo;document.title=S.shop+" – Prenota";document.getElementById("app").innerHTML=V=="c"?client():admin()}
+function render(){document.getElementById("shop").textContent=S.shop;document.getElementById("sub").textContent=S.sub==null?DEF.sub:S.sub;var lg=document.getElementById("logo"),em=document.getElementById("emb");lg.hidden=!S.logo;em.style.display=S.logo?"none":"block";if(S.logo)lg.src=S.logo;document.title=S.shop+" – Prenota";var L=V=="l";document.getElementById("land").hidden=!L;document.querySelector(".hero").hidden=L;document.querySelector(".gl").hidden=L;document.getElementById("app").hidden=L;if(L)landFill();else document.getElementById("app").innerHTML=V=="c"?client():admin()}
 function client(){
   var h="";
   if(st.done){var b=st.done;return'<div class="ok card">'+IC.p+'<h2>Prenotazione confermata</h2><p><b>'+esc(b.sn)+'</b><br>'+fdate(b.date)+' alle '+b.time+(S.chairs.length>1?'<br><span class="mu">'+esc(cn(b.ch))+'</span>':'')+'</p><p class="mu">Ti aspettiamo, '+esc(b.name)+'.</p><button class="btn" onclick="go(\'c\')">Nuova prenotazione</button></div>'}
@@ -155,7 +213,7 @@ function admin(){
   h+='<h3>Orari settimanali</h3><div class="card">'+S.hours.map(function(x,i){
     return'<div class="row"><b style="width:100px">'+DAYS[i]+'</b><label><input type="checkbox" style="width:auto" '+(x.x?'checked':'')+' onchange="S.hours['+i+'].x=this.checked?1:0;save()"> Chiuso</label><input type="time" value="'+x.o+'" onchange="S.hours['+i+'].o=this.value;save()"><input type="time" value="'+x.c+'" onchange="S.hours['+i+'].c=this.value;save()"></div>'}).join("")+'</div>';
   h+='<h3>Chiusure straordinarie</h3><div class="card"><div class="row"><input type="date" id="cl"><button class="btn sm" onclick="addC()">Aggiungi</button></div>'+S.closures.sort().map(function(c,i){return'<div class="bk"><span>'+fdate(c)+'</span><button class="btn ghost sm" onclick="S.closures.splice('+i+',1);save();render()">Rimuovi</button></div>'}).join("")+'</div>';
-  h+='<h3>Impostazioni</h3><div class="card"><label class="field"><span>Nome del negozio</span><input value="'+esc(S.shop)+'" onchange="S.shop=this.value;save();render()"></label><label class="field"><span>Sottotitolo</span><input value="'+esc(S.sub==null?DEF.sub:S.sub)+'" onchange="S.sub=this.value;save();render()"></label><div class="field"><span>Logo (facoltativo)</span><div class="row">'+(S.logo?'<img src="'+S.logo+'" alt="" style="height:48px;max-width:120px;object-fit:contain"><button class="btn ghost sm" onclick="S.logo=\'\';save();render()">Rimuovi logo</button>':'<span class="mu">Nessun logo: viene mostrato lo stemma.</span>')+'<input type="file" accept="image/*" onchange="upLogo(this)"></div></div><label class="field"><span>Intervallo tra gli orari</span><select onchange="S.step=+this.value;save()">'+[15,30,60].map(function(m){return'<option value="'+m+'"'+(S.step==m?' selected':'')+'>'+dl(m)+'</option>'}).join("")+'</select></label><label class="field"><span>Nuovo PIN</span><input value="'+esc(S.pin)+'" onchange="S.pin=this.value;save()"></label><button class="btn ghost" onclick="A=false;render()">Esci</button></div>';
+  h+='<h3>Impostazioni</h3><div class="card"><label class="field"><span>Nome del negozio</span><input value="'+esc(S.shop)+'" onchange="S.shop=this.value;save();render()"></label><label class="field"><span>Frase di benvenuto (pagina iniziale)</span><input value="'+esc(S.wel==null?DEF.wel:S.wel)+'" onchange="S.wel=this.value;save()"></label><label class="field"><span>Sottotitolo</span><input value="'+esc(S.sub==null?DEF.sub:S.sub)+'" onchange="S.sub=this.value;save();render()"></label><div class="field"><span>Logo (facoltativo)</span><div class="row">'+(S.logo?'<img src="'+S.logo+'" alt="" style="height:48px;max-width:120px;object-fit:contain"><button class="btn ghost sm" onclick="S.logo=\'\';save();render()">Rimuovi logo</button>':'<span class="mu">Nessun logo: viene mostrato lo stemma.</span>')+'<input type="file" accept="image/*" onchange="upLogo(this)"></div></div><label class="field"><span>Intervallo tra gli orari</span><select onchange="S.step=+this.value;save()">'+[15,30,60].map(function(m){return'<option value="'+m+'"'+(S.step==m?' selected':'')+'>'+dl(m)+'</option>'}).join("")+'</select></label><label class="field"><span>Nuovo PIN</span><input value="'+esc(S.pin)+'" onchange="S.pin=this.value;save()"></label><button class="btn ghost" onclick="A=false;render()">Esci</button></div>';
   h+='<div class="hint">Versione demo: i dati restano salvati in questo browser. Per condividerli tra dispositivi serve collegare un database (es. Supabase).</div>';
   return h}
 function upLogo(i){var f=i.files&&i.files[0];if(!f)return;if(f.size>8e6){alert("Immagine troppo grande (max 8 MB).");return}var u=URL.createObjectURL(f),im=new Image();im.onload=function(){var k=Math.min(1,320/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.max(1,Math.round(im.width*k));c.height=Math.max(1,Math.round(im.height*k));c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);try{S.logo=c.toDataURL("image/png")}catch(e){alert("Impossibile leggere l’immagine.");return}save();render()};im.onerror=function(){alert("File non valido.")};im.src=u}
@@ -164,6 +222,15 @@ function delB(id){if(confirm("Annullare la prenotazione?")){S.bookings=S.booking
 function addC(){var v=document.getElementById("cl").value;if(v&&S.closures.indexOf(v)<0){S.closures.push(v);save();render()}}
 document.addEventListener("pointermove",function(e){var c=e.target.closest&&e.target.closest(".svc");if(!c||e.pointerType=="touch")return;var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform="rotateY("+(x*16)+"deg) rotateX("+(-y*16)+"deg) translateZ(10px)"});
 document.addEventListener("pointerout",function(e){var c=e.target.closest&&e.target.closest(".svc");if(c&&!c.contains(e.relatedTarget))c.style.transform=""});
+var busy=0;
+function nav(v){if(busy)return;busy=1;var w=document.getElementById('wipe');w.classList.add('on');setTimeout(function(){go(v);window.scrollTo(0,0);document.body.classList.add('enter');w.classList.remove('on');setTimeout(function(){document.body.classList.remove('enter');busy=0},1100)},700)}
+function chars(t,o){var i=o;return t.split(' ').map(function(w){return `<span class='w'>`+Array.from(w).map(function(c){return `<span class='ch' style='--i:${i++}'>${esc(c)}</span>`}).join('')+`</span>`}).join(' ')}
+function landFill(){var w=S.wel==null?DEF.wel:S.wel,t=S.sub==null?DEF.sub:S.sub;document.getElementById('wl').innerHTML=chars(w,0);document.getElementById('wn').innerHTML=chars(S.shop,w.length);document.getElementById('wt').textContent=t;var lg=document.getElementById('logo2');lg.hidden=!S.logo;if(S.logo)lg.src=S.logo}
+(function(){var it=[['c',6,16,70,9,0,.5],['s',84,12,52,11,1,1.1],['c',86,62,86,12,2,.4],['s',9,68,58,10,.5,.8],['c',44,88,58,13,1.5,.6],['s',72,40,36,8,2.5,1.3],['c',22,40,40,10,3,.9]];
+document.getElementById('fl').innerHTML=it.map(function(a){return `<div class='f' data-d='${a[6]}' style='left:${a[1]}%;top:${a[2]}%;width:${a[3]}px'><div style='animation-duration:${a[4]}s;animation-delay:-${a[5]}s'>${IC[a[0]]}</div></div>`}).join('');
+var L=document.getElementById('land'),b=document.getElementById('mag');
+L.addEventListener('pointermove',function(e){if(e.pointerType=='touch')return;var px=e.clientX/innerWidth-.5,py=e.clientY/innerHeight-.5;L.querySelectorAll('.f').forEach(function(f){var d=+f.dataset.d;f.style.transform='translate3d('+(-px*60*d)+'px,'+(-py*60*d)+'px,0)'});var r=b.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);b.style.transform=Math.hypot(dx,dy)<160?'translate('+dx*.22+'px,'+dy*.3+'px)':''});
+document.getElementById('cta').addEventListener('click',function(){nav('c')})})();
 render();
 </script>
 </body></html>
