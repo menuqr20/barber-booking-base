@@ -70,6 +70,42 @@ body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 Montserrat,syst
 body.enter .hero .in,body.enter #app>*{animation:up .7s cubic-bezier(.2,.7,.2,1) both}
 body.enter #app>*:nth-child(2){animation-delay:.1s}body.enter #app>*:nth-child(3){animation-delay:.2s}
 @media(prefers-reduced-motion:reduce){#land *,.wipe i{animation-duration:.01s!important;animation-iteration-count:1!important;transition-duration:.01s!important}}
+html,body{max-width:100%;overflow-x:hidden;overscroll-behavior-x:none;touch-action:pan-y pinch-zoom;-webkit-text-size-adjust:100%}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;overflow:visible;padding:4px 0 8px}
+.day{width:auto;padding:8px 0}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px}
+.slot{padding:11px 0;text-align:center}
+.bk>div{min-width:0;overflow-wrap:anywhere}
+.row select,.row input{max-width:100%}
+#land{min-height:100dvh}
+@media(max-width:560px){
+.wrap{padding:14px 12px 36px}
+.hero{padding:14px}.hero .in{flex-wrap:wrap;gap:10px 14px}
+.stage{padding:0}.stage svg{width:54px;height:54px}#logo{max-height:54px;max-width:90px}
+.hero h1{font-size:26px}.hero p{letter-spacing:2px;font-size:10px}
+.nav{margin-left:0;width:100%;flex-direction:row;gap:8px}.nav .btn{flex:1;min-height:44px}
+h2{font-size:22px}
+.grid{grid-template-columns:1fr 1fr;gap:10px}
+.svc{padding:14px}.svc svg{width:38px;height:38px}.svc b{font-size:16px}.svc .price{font-size:18px}
+.btn{min-height:44px}.btn.sm{min-height:40px}
+.row input{min-width:0}.row input:not([type]){flex:1 1 100%}
+.day small{font-size:9px;letter-spacing:0}.day b{font-size:18px}
+.card{padding:14px}
+#land{padding:24px 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.scis{width:42vw;max-width:150px}
+.wl{letter-spacing:2px}.wn{font-size:clamp(34px,11vw,64px)}
+.cta{padding:16px 22px;max-width:100%}
+.f:nth-child(n+6){display:none}.f{max-width:64px}
+}
+.nav{margin-left:auto;display:flex;flex-direction:row;align-items:center;gap:4px}
+.nav button{background:none;border:0;border-bottom:2px solid transparent;padding:10px 12px;font:600 12px Montserrat,sans-serif;letter-spacing:2px;text-transform:uppercase;color:var(--mu);cursor:pointer;transition:color .2s,border-color .2s;min-height:44px}
+.nav button:hover{color:var(--tx)}
+.nav button.on{color:var(--gold2);border-bottom-color:var(--gold)}
+.nav .sp2{width:1px;height:20px;background:var(--bd);margin:0 8px}
+.nav .adm{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--bd);border-radius:999px;padding:8px 12px;min-height:36px;font-size:11px;letter-spacing:1.5px}
+.nav .adm svg{width:13px;height:13px}
+.nav .adm.on{border-color:var(--gold)}
+@media(max-width:560px){.nav{margin-left:0;width:100%;border-top:1px solid var(--bd);padding-top:6px}.nav .sp2{flex:1;background:none}.nav button{padding:10px}}
 @media(prefers-reduced-motion:reduce){.pole3d,.tube{animation:none}}
 button,select,input{font:inherit;color:inherit}
 .btn{border:0;border-radius:12px;padding:11px 18px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--ink);font-weight:600;letter-spacing:.5px;cursor:pointer;box-shadow:0 6px 18px #0004}
@@ -123,7 +159,7 @@ input:focus,select:focus{outline:2px solid var(--gold)}
 <section class="hero"><div class="in">
   <div class="stage" aria-hidden="true"><img id="logo" alt="" hidden><svg id="emb" viewBox="0 0 96 96" width="88" height="88" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);display:block"><circle cx="48" cy="48" r="45" stroke-width="2"/><circle cx="48" cy="48" r="39" stroke-width=".8"/><g transform="translate(24 24)" stroke-width="2.4"><circle cx="11" cy="37" r="6"/><circle cx="25" cy="39" r="6"/><path d="M15 32 40 6M22 34 12 6"/></g></svg></div>
   <div><h1 id="shop"></h1><p id="sub"></p></div>
-  <div class="nav"><button class="btn sm" onclick="nav('c')">Prenota</button><button class="btn ghost sm" onclick="nav('l')">Home</button><button class="btn ghost sm" onclick="nav('a')">Admin</button></div>
+  <nav class='nav' id='nav'><button data-v='l'>Home</button><button data-v='c'>Prenota</button><span class='sp2'></span><button data-v='a' class='adm'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg>Admin</button></nav>
 </div></section>
 <div class="gl"></div>
 <main class="wrap" id="app"></main>
@@ -167,7 +203,7 @@ function slots(ds,dur){
   for(var t=o;t+dur<=c;t+=S.step){if(t<=nm)continue;if(freeChair(ds,t,dur)!==null)out.push(hm(t))}
   return out}
 function go(v){V=v;if(v=="c")st={step:0,sid:null,date:null,time:null,done:null};render()}
-function render(){document.getElementById("shop").textContent=S.shop;document.getElementById("sub").textContent=S.sub==null?DEF.sub:S.sub;var lg=document.getElementById("logo"),em=document.getElementById("emb");lg.hidden=!S.logo;em.style.display=S.logo?"none":"block";if(S.logo)lg.src=S.logo;document.title=S.shop+" – Prenota";var L=V=="l";document.getElementById("land").hidden=!L;document.querySelector(".hero").hidden=L;document.querySelector(".gl").hidden=L;document.getElementById("app").hidden=L;if(L)landFill();else document.getElementById("app").innerHTML=V=="c"?client():admin()}
+function render(){document.getElementById("shop").textContent=S.shop;document.getElementById("sub").textContent=S.sub==null?DEF.sub:S.sub;var lg=document.getElementById("logo"),em=document.getElementById("emb");lg.hidden=!S.logo;em.style.display=S.logo?"none":"block";if(S.logo)lg.src=S.logo;document.title=S.shop+" – Prenota";document.querySelectorAll('#nav button').forEach(function(b){b.classList.toggle('on',b.dataset.v==V)});var L=V=="l";document.getElementById("land").hidden=!L;document.querySelector(".hero").hidden=L;document.querySelector(".gl").hidden=L;document.getElementById("app").hidden=L;if(L)landFill();else document.getElementById("app").innerHTML=V=="c"?client():admin()}
 function client(){
   var h="";
   if(st.done){var b=st.done;return'<div class="ok card">'+IC.p+'<h2>Prenotazione confermata</h2><p><b>'+esc(b.sn)+'</b><br>'+fdate(b.date)+' alle '+b.time+(S.chairs.length>1?'<br><span class="mu">'+esc(cn(b.ch))+'</span>':'')+'</p><p class="mu">Ti aspettiamo, '+esc(b.name)+'.</p><button class="btn" onclick="go(\'c\')">Nuova prenotazione</button></div>'}
@@ -223,7 +259,7 @@ function addC(){var v=document.getElementById("cl").value;if(v&&S.closures.index
 document.addEventListener("pointermove",function(e){var c=e.target.closest&&e.target.closest(".svc");if(!c||e.pointerType=="touch")return;var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform="rotateY("+(x*16)+"deg) rotateX("+(-y*16)+"deg) translateZ(10px)"});
 document.addEventListener("pointerout",function(e){var c=e.target.closest&&e.target.closest(".svc");if(c&&!c.contains(e.relatedTarget))c.style.transform=""});
 var busy=0;
-function nav(v){if(busy)return;busy=1;var w=document.getElementById('wipe');w.classList.add('on');setTimeout(function(){go(v);window.scrollTo(0,0);document.body.classList.add('enter');w.classList.remove('on');setTimeout(function(){document.body.classList.remove('enter');busy=0},1100)},700)}
+function nav(v){if(busy||v==V)return;busy=1;var w=document.getElementById('wipe');w.classList.add('on');setTimeout(function(){go(v);window.scrollTo(0,0);document.body.classList.add('enter');w.classList.remove('on');setTimeout(function(){document.body.classList.remove('enter');busy=0},1100)},700)}
 function chars(t,o){var i=o;return t.split(' ').map(function(w){return `<span class='w'>`+Array.from(w).map(function(c){return `<span class='ch' style='--i:${i++}'>${esc(c)}</span>`}).join('')+`</span>`}).join(' ')}
 function landFill(){var w=S.wel==null?DEF.wel:S.wel,t=S.sub==null?DEF.sub:S.sub;document.getElementById('wl').innerHTML=chars(w,0);document.getElementById('wn').innerHTML=chars(S.shop,w.length);document.getElementById('wt').textContent=t;var lg=document.getElementById('logo2');lg.hidden=!S.logo;if(S.logo)lg.src=S.logo}
 (function(){var it=[['c',6,16,70,9,0,.5],['s',84,12,52,11,1,1.1],['c',86,62,86,12,2,.4],['s',9,68,58,10,.5,.8],['c',44,88,58,13,1.5,.6],['s',72,40,36,8,2.5,1.3],['c',22,40,40,10,3,.9]];
@@ -231,6 +267,7 @@ document.getElementById('fl').innerHTML=it.map(function(a){return `<div class='f
 var L=document.getElementById('land'),b=document.getElementById('mag');
 L.addEventListener('pointermove',function(e){if(e.pointerType=='touch')return;var px=e.clientX/innerWidth-.5,py=e.clientY/innerHeight-.5;L.querySelectorAll('.f').forEach(function(f){var d=+f.dataset.d;f.style.transform='translate3d('+(-px*60*d)+'px,'+(-py*60*d)+'px,0)'});var r=b.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);b.style.transform=Math.hypot(dx,dy)<160?'translate('+dx*.22+'px,'+dy*.3+'px)':''});
 document.getElementById('cta').addEventListener('click',function(){nav('c')})})();
+document.getElementById('nav').addEventListener('click',function(e){var b=e.target.closest('button');if(b)nav(b.dataset.v)});
 render();
 </script>
 </body></html>
